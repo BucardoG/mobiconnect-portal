@@ -1,0 +1,44 @@
+---
+title: Construye sobre el contrato.
+description: La API de Mobiconnect decide, antes de cada consumo, si un tenant puede usar un producto, y deja cada unidad medida y valorizada.
+---
+
+import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
+
+Antes de cada consumo, la API de Mobiconnect responde una pregunta: **¿este tenant puede usar este producto, en este scope y con esta cantidad?** Cada unidad autorizada queda medida y valorizada en un registro auditable.
+
+:::note[Estás en staging]
+Autenticación OAuth2, tenants sintéticos y sin dinero real. Las URLs de esta documentación son de ejemplo hasta la apertura pública del portal.
+:::
+
+## Empieza aquí
+
+<CardGrid>
+  <LinkCard title="Quickstart" description="Tu primera decisión en 3 pasos." href="/quickstart/" />
+  <LinkCard title="Referencia: POST /v1/entitlements/check" description="Encabezados, cuerpo, razones y respuestas." href="/apis/entitlements/check/" />
+</CardGrid>
+
+## APIs, y en qué estado está cada una
+
+<CardGrid>
+  <Card title="Entitlements v1 · staging">
+    Decisión, cuota y medición por cada consumo. Deny-by-default. `POST /v1/entitlements/check`
+  </Card>
+  <Card title="Number Intelligence v1 · en diseño">
+    Operador vigente, validación y limpieza de bases de números +56.
+  </Card>
+  <Card title="Plataforma CAMARA · en construcción">
+    Number Verification, SIM Swap y calidad de red del operador, bajo contrato.
+  </Card>
+  <Card title="Open Finance Bridge · en diseño">
+    El mismo contrato y medición, aplicado a APIs de finanzas abiertas.
+  </Card>
+</CardGrid>
+
+## Tres reglas que no cambian
+
+- **Deny-by-default.** Toda ruta exige un scope explícito. Lo que no sea `200` con `allow: true` es deny.
+- **La cuota agotada no es un error.** Responde `200 {"allow": false, "reason": "quota_exceeded"}`. El `429` es del gateway, no del contrato.
+- **Fail-closed.** Si el PDP no puede decidir, responde `503 {"allow": false, "error": "pdp_unavailable"}`. Nunca se sirve a ciegas.
+
+¿Algo no está claro? Escríbenos a [hola@mobiconnect.app](mailto:hola@mobiconnect.app).

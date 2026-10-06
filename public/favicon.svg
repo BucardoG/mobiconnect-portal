@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <title>Mobiconnect</title>
+  <!-- Logotipo 01 «Muestreo» — reducción ≤32 px (DOSSIER-MAESTRO §3.1). Se adapta a pestañas oscuras. -->
+  <style>
+    .ink { fill: #0A0A0A; }
+    .sig { stroke: #0F766E; }
+    @media (prefers-color-scheme: dark) {
+      .ink { fill: #FAFAF9; }
+      .sig { stroke: #5EEAD4; }
+    }
+  </style>
+  <path class="sig" d="M5.5 7C7.04 7 8.58 7.37 10.12 9.06C11.67 10.75 13.21 13.7 14.75 17.15C16.29 20.61 17.83 24.48 19.38 27.35C20.92 30.22 22.46 32 24 32C25.54 32 27.08 30.22 28.62 27.35C30.17 24.48 31.71 20.61 33.25 17.15C34.79 13.7 36.33 10.75 37.88 9.06C39.42 7.37 40.96 7 42.5 7" fill="none" stroke-width="6" stroke-linejoin="round"/>
+  <rect class="ink" x="2" y="4" width="7" height="40" rx="1"/>
+  <rect class="ink" x="39" y="4" width="7" height="40" rx="1"/>
+</svg>
