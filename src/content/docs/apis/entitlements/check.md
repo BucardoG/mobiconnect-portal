@@ -22,12 +22,16 @@ Pide una decisión al PDP comercial: ¿este tenant puede consumir este producto,
 | Campo | Tipo | | Descripción |
 | --- | --- | --- | --- |
 | `tenant_id` | uuid | requerido | Tenant que consume. Bajo RLS: solo ves tus datos. |
-| `product_code` | string | requerido | Producto del catálogo, p. ej. `sms.otp`. Desconocido, gated o deprecado responde `no_subscription`. |
-| `scope` | string | requerido | Acción dentro del producto, p. ej. `send`. |
+| `product_code` | string | requerido | Producto del catálogo, p. ej. `mnp.lookup` (consulta de portabilidad). Desconocido, gated o deprecado responde `no_subscription`. |
+| `scope` | string | requerido | Acción dentro del producto, p. ej. `lookup`. Tiene que estar concedida en el entitlement del tenant; si no, responde `scope_denied`. |
 | `quantity` | integer | requerido | Unidades que se van a consumir. |
 | `correlation_id` | string | recomendado | Identifica el consumo: un replay responde `409 duplicate_correlation_id`. Es el que usa [`release`](/apis/entitlements/release/). |
 
 ## Ejemplo
+
+:::note[Qué muestra este ejemplo]
+La decisión comercial de Entitlements sobre un producto del catálogo de staging (`mnp.lookup`): permiso, cuota y medición. No ejecuta el servicio: la consulta de portabilidad de Number Intelligence está en diseño.
+:::
 
 ```bash
 curl -X POST https://api.staging.example/v1/entitlements/check \
@@ -36,8 +40,8 @@ curl -X POST https://api.staging.example/v1/entitlements/check \
   -H "Content-Type: application/json" \
   -d '{
     "tenant_id": "00000000-5e5e-4000-8000-0000a919e001",
-    "product_code": "sms.otp",
-    "scope": "send",
+    "product_code": "mnp.lookup",
+    "scope": "lookup",
     "quantity": 1,
     "correlation_id": "7f3c9a01-2b8e-4c5d-9f6a-demo00000123"
   }'
@@ -49,7 +53,7 @@ curl -X POST https://api.staging.example/v1/entitlements/check \
 {
   "allow": true,
   "reason": "ok",
-  "remaining_quota": 99941,
+  "remaining_quota": 978,
   "plan_id": "…",
   "price_ref": "…"
 }

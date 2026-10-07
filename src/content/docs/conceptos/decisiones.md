@@ -12,7 +12,7 @@ El PDP siempre responde `200` con una decisión explícita, salvo error de entra
 | `ok` | `true` | Permitido. La unidad queda medida. |
 | `no_subscription` | `false` | El tenant no tiene ese producto. También para productos desconocidos, gated o deprecados. |
 | `suspended` | `false` | La suscripción está suspendida. |
-| `scope_denied` | `false` | El scope pedido no está en la suscripción. |
+| `scope_denied` | `false` | El scope pedido no está concedido en el entitlement del tenant. |
 | `quota_exceeded` | `false` | Se agotó la cuota del período. |
 
 :::note[La cuota agotada no es un error]

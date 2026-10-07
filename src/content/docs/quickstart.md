@@ -30,7 +30,7 @@ curl -s -X POST https://api.staging.example/v1/entitlements/check \
   -H "Idempotency-Key: 7f3c9a01-2b8e-4c5d-9f6a-demo00000123" \
   -H "Content-Type: application/json" \
   -d '{ "tenant_id": "00000000-5e5e-4000-8000-0000a919e001",
-        "product_code": "sms.otp", "scope": "send", "quantity": 1,
+        "product_code": "mnp.lookup", "scope": "lookup", "quantity": 1,
         "correlation_id": "7f3c9a01-2b8e-4c5d-9f6a-demo00000123" }'
 ```
 
@@ -42,7 +42,7 @@ Todo lo que no sea `200` con `allow: true` se trata como deny.
 {
   "allow": true,
   "reason": "ok",
-  "remaining_quota": 99941,
+  "remaining_quota": 978,
   "plan_id": "…",
   "price_ref": "…"
 }
