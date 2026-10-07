@@ -9,9 +9,9 @@ Entitlements es el **PDP comercial** (Policy Decision Point): decide si un consu
 
 | Recurso | Qué es | Campos clave |
 | --- | --- | --- |
-| Producto (`api_products`) | Lo que se puede vender o consumir: live, gated o deprecated. | `product_code` (p. ej. `sms.otp`), `quota_mode` (`strict` / `eventual`), `fail_mode` |
+| Producto (`api_products`) | Lo que se puede vender o consumir: live, gated o deprecated. | `product_code` (p. ej. `mnp.lookup`), `quota_mode` (`strict` / `eventual`), `fail_mode` |
 | Plan (`plans`) | La unidad comercial: un producto con límites y modelo de precio. | `rate_limit_rps`, `burst`, `quota_period` (`day` / `month`), `quota_amount`, `price_model`, `price_ref` |
-| Suscripción (`subscriptions`) | Lo que un tenant tiene contratado. | `tenant_id`, `plan_id`, `status` (`trial` / `active` / `suspended` / `cancelled`), `valid_from`, `valid_until`, `scope[]` |
+| Suscripción (`subscriptions`) | Lo que un tenant tiene contratado. | `tenant_id`, `plan_id`, `status` (`trial` / `active` / `suspended` / `cancelled`), `valid_from`, `valid_until`. Al activarse genera los entitlements del tenant, que llevan los `scope[]` concedidos. |
 | Registro de uso (`usage_records`) | Libro append-only del consumo. | cantidad, unidad, `price_ref` congelado al momento del consumo, `correlation_id` |
 
 ## Modos de cuota
